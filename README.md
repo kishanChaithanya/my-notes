@@ -64,7 +64,7 @@ Run `npm run build`, then drag the `dist/` folder onto [app.netlify.com/drop](ht
 
 Requires an Apple-chip Mac (M1 or newer) on macOS 13 or newer.
 
-1. Run `npm run mac:dmg` and copy `release/My Notes-0.0.0-arm64.dmg` to the other Mac.
+1. Download `My.Notes-0.0.0-arm64.dmg` from the [latest release](https://github.com/kishanChaithanya/my-notes/releases/latest), or build it yourself with `npm run mac:dmg` (output in `release/`).
 2. Open the `.dmg` and drag **My Notes** into **Applications**.
 3. On first launch macOS blocks the unsigned app. Click **Done**, then go to **System Settings → Privacy & Security → Open Anyway**. Or run this once:
 
