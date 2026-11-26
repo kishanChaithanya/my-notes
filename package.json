@@ -1,0 +1,65 @@
+{
+  "name": "my-notes",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "electron:dev": "concurrently -k -n vite,electron \"vite --port 5173 --strictPort\" \"wait-on tcp:5173 && VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "electron:start": "vite build && electron .",
+    "mac:build": "tsc -b && vite build && electron-builder --mac --dir",
+    "mac:dmg": "tsc -b && vite build && electron-builder --mac dmg"
+  },
+  "dependencies": {
+    "@tiptap/extension-placeholder": "^3.33.0",
+    "@tiptap/extension-task-item": "^3.33.0",
+    "@tiptap/extension-task-list": "^3.33.0",
+    "@tiptap/pm": "^3.33.0",
+    "@tiptap/react": "^3.33.0",
+    "@tiptap/starter-kit": "^3.33.0",
+    "dexie": "^4.4.7",
+    "dexie-react-hooks": "^4.4.0",
+    "minisearch": "^7.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.7",
+    "electron": "^45.3.1",
+    "electron-builder": "^26.18.0",
+    "oxlint": "^1.90.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.6",
+    "wait-on": "^9.5.1"
+  },
+  "description": "My Notes — a local-first notes app for the web and macOS",
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "com.mynotes.app",
+    "productName": "My Notes",
+    "files": [
+      "dist/**",
+      "electron/**",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ],
+      "identity": "-",
+      "hardenedRuntime": false
+    }
+  }
+}

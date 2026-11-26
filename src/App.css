@@ -1,0 +1,105 @@
+.app { display: grid; grid-template-columns: 220px 300px 1fr; height: 100vh; }
+.pane { overflow-y: auto; border-right: 1px solid var(--border); }
+.pane ul { list-style: none; margin: 0; padding: 0; }
+.pane h4 { margin: 12px 14px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.empty { color: var(--muted); text-align: center; margin-top: 40px; }
+.muted { color: var(--muted); font-size: 12px; }
+.icon-btn { border: none; background: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; color: var(--muted); }
+.icon-btn:hover { background: var(--accent-soft); color: var(--accent); }
+
+/* folders */
+.folders { background: var(--pane); display: flex; flex-direction: column; padding: 12px 8px; }
+.folders ul { flex: 1; }
+.folders li { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 6px; cursor: default; font-size: 14px; }
+.folders li .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.folders li .count { color: var(--muted); font-size: 12px; }
+.folders li.selected { background: var(--accent-soft); }
+.folders li input { flex: 1; font: inherit; min-width: 0; }
+.folders li .del { visibility: hidden; }
+.folders li:hover .del { visibility: visible; }
+.new-folder { border: none; background: none; color: var(--accent); text-align: left; padding: 8px 10px; cursor: pointer; }
+
+/* note list */
+.list { background: var(--list); }
+.list header { position: sticky; top: 0; display: flex; gap: 6px; padding: 10px; background: var(--list); border-bottom: 1px solid var(--border); z-index: 1; }
+.list header input { flex: 1; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 13px; }
+.list li { position: relative; padding: 10px 34px 10px 14px; margin: 0 6px; border-bottom: 1px solid var(--border); border-radius: 6px; cursor: default; }
+.list li.selected { background: var(--accent-soft); }
+.list .title { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list .meta { display: flex; gap: 8px; font-size: 12px; margin-top: 2px; }
+.list .date { font-weight: 500; flex-shrink: 0; }
+.list .snippet { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list .pin { position: absolute; right: 6px; top: 10px; opacity: 0; }
+.list li:hover .pin, .list .pin.on { opacity: 1; }
+.list .pin.on { color: var(--accent); }
+
+/* editor */
+.detail { display: flex; flex-direction: column; border-right: none; }
+.detail-bar { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--border); }
+.detail-bar .muted { flex: 1; }
+.detail-bar button { border: 1px solid var(--border); background: none; border-radius: 6px; padding: 3px 10px; cursor: pointer; font-size: 13px; }
+.detail-bar .danger { color: var(--danger); }
+.editor { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.toolbar { display: flex; gap: 2px; padding: 6px 12px; border-bottom: 1px solid var(--border); }
+.toolbar button { border: none; background: none; min-width: 30px; padding: 4px 6px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
+.toolbar button:hover { background: var(--pane); }
+.toolbar button.active { background: var(--accent-soft); color: var(--accent); }
+.toolbar .sep { width: 1px; background: var(--border); margin: 2px 6px; }
+.editor-content { flex: 1; overflow-y: auto; }
+.editor-content .tiptap { max-width: 760px; margin: 0 auto; padding: 24px 32px 80px; outline: none; line-height: 1.55; min-height: 100%; }
+.tiptap h1 { font-size: 1.8em; margin: .2em 0 .4em; }
+.tiptap h2 { font-size: 1.35em; }
+.tiptap h3 { font-size: 1.1em; }
+.tiptap p.is-empty::before, .tiptap h1.is-empty::before { content: attr(data-placeholder); color: var(--muted); float: left; height: 0; pointer-events: none; }
+.tiptap ul, .tiptap ol { padding-left: 1.6em; margin: .4em 0; }
+.tiptap ul { list-style: disc; }
+.tiptap ol { list-style: decimal; }
+.tiptap li > p { margin: .15em 0; }
+.tiptap blockquote { margin: .6em 0; padding-left: 1em; border-left: 3px solid var(--border); color: var(--muted); }
+.tiptap pre { background: var(--pane); padding: 10px 12px; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+.tiptap ul[data-type="taskList"] { list-style: none; padding-left: 4px; }
+.tiptap ul[data-type="taskList"] li { display: flex; gap: 8px; align-items: flex-start; }
+.tiptap ul[data-type="taskList"] li > label { margin-top: .2em; }
+.tiptap ul[data-type="taskList"] li > label input { width: 16px; height: 16px; accent-color: var(--accent); }
+.tiptap ul[data-type="taskList"] li > div { flex: 1; }
+.tiptap ul[data-type="taskList"] li[data-checked="true"] > div { color: var(--muted); text-decoration: line-through; }
+.tiptap ul[data-type="taskList"] p { margin: 0; }
+
+.app.no-folders { grid-template-columns: 300px 1fr; }
+
+/* ---------- macOS desktop app (Electron) ---------- */
+html.desktop, html.desktop body { background: transparent; }
+html.desktop .app { --bar-h: 52px; }
+html.desktop .pane { -webkit-user-select: none; user-select: none; }
+html.desktop .tiptap { -webkit-user-select: text; user-select: text; }
+html.desktop .detail { background: var(--bg); }
+html.desktop .icon-btn,
+html.desktop .new-folder,
+html.desktop .folders li { cursor: default; }
+
+/* Sidebar shows the native translucent vibrancy; leave room for the traffic lights. */
+html.desktop .folders { position: relative; background: transparent; padding-top: var(--bar-h); }
+html.desktop .folders::before {
+  content: ''; position: absolute; inset: 0 0 auto 0; height: var(--bar-h); -webkit-app-region: drag;
+}
+html.desktop .folders li.selected { background: color-mix(in srgb, var(--text) 12%, transparent); }
+
+/* Title-bar strips are draggable; their controls are not. */
+html.desktop .list header,
+html.desktop .detail-bar { min-height: var(--bar-h); align-items: center; -webkit-app-region: drag; }
+html.desktop .list header input,
+html.desktop .list header button,
+html.desktop .detail-bar button { -webkit-app-region: no-drag; }
+html.desktop .no-folders .list header { padding-left: 84px; }
+
+/* ---------- print / PDF export: just the note ---------- */
+@media print {
+  .folders, .list, .detail-bar, .toolbar { display: none !important; }
+  .app, .app.no-folders { display: block; height: auto; }
+  .pane, .detail, .editor, .editor-content { overflow: visible; border: none; background: none; }
+  .editor-content .tiptap { max-width: none; padding: 0; }
+  html, body, #root { height: auto; background: #fff; color: #000; }
+}
+@media print {
+  :root { --text: #000; --muted: #555; --bg: #fff; --border: #ccc; color: #000; }
+}
