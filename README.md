@@ -2,7 +2,7 @@
 
 A local-first notes app (React + TipTap + IndexedDB) that runs in the browser and as a macOS desktop app (Electron).
 
-Team guide (step-by-step, non-technical): [My Notes: Web & Mac App Guide](https://claude.ai/artifact/4GGdPsxJFTJd1jPL6vXGg2), also saved as a PDF in [`docs/My Notes Guide.pdf`](docs/My%20Notes%20Guide.pdf)
+Team guide (step-by-step, non-technical): [`docs/My Notes Guide.pdf`](docs/My%20Notes%20Guide.pdf)
 
 ## Setup
 
@@ -77,7 +77,7 @@ To move notes across, quit the app on both Macs and copy `~/Library/Application 
 ## How it was built
 
 1. **Web app first** (`src/`): React UI, TipTap editor, Dexie over IndexedDB for storage, MiniSearch for search, built with Vite.
-2. **Apple Notes menus, studied with REA.** REA (via the `reverse-engineer-anything` skill) opened `/System/Applications/Notes.app`. Decoding its nib files crashed REA, so menu names came from `MainMenu.loctable` and the menu tree and shortcuts from a small Python decoder for `MainMenu.nib`. Only menu names and shortcuts were used. No Apple code or assets were copied. If REA misbehaves, run `npx -y rea-agents@latest doctor` and restart Claude.
+2. **Apple Notes menus, studied with REA.** REA, a reverse-engineering tool, opened `/System/Applications/Notes.app`. Decoding its nib files crashed REA, so menu names came from `MainMenu.loctable` and the menu tree and shortcuts from a small Python decoder for `MainMenu.nib`. Only menu names and shortcuts were used. No Apple code or assets were copied. If REA misbehaves, run `npx -y rea-agents@latest doctor`.
 3. **Electron shell** (`electron/`): window, an Apple Notes-style menu bar wired to the web app through `preload.cjs`, plus Duplicate, Export as PDF/Markdown, Sort By and Hide Folders.
 4. **Packaging**: electron-builder with ad-hoc signing (`npm run mac:dmg`).
 
